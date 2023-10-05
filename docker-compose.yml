@@ -1,0 +1,27 @@
+version: '3.3'
+
+networks:
+  custom_bridge:
+    driver: bridge
+    name: custom_bridge
+    config:
+      - subnet: "172.18.0.0/16"
+      - gateway: "172.18.0.1"
+
+services:
+  server:
+    image: alpine_netcat_image
+    networks:
+      custom_bridge:
+        ipv4_address: 172.18.0.2
+    command: ["/scripts/server_script.sh"]
+    container_name: netcat_server
+
+  client:
+    image: alpine_netcat_image
+    networks:
+      - custom_bridge
+    depends_on:
+      - server
+    command: ["/scripts/client_script.sh"]
+    container_name: netcat_client
