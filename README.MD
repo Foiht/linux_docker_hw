@@ -8,11 +8,15 @@ Run docker containers:
 
 ```docker-compose up -d```
 
-Verify commutication beatween containers:
+Verify commutication between containers:
 
 ```docker logs netcat_server```
 ```docker logs netcat_client```
 
-Save docker image localy:
+To stop containers:
 
-```docker save -o ./alpine_netcat_image.tar alpine_netcat_image```
+```docker-compose stop```
+
+To delete containers and custom network:
+
+```docker-compose down```
